@@ -117,7 +117,12 @@ function oembed(url, options, endpoint, mainCallback, _canonical) {
             return callback(null);
           });
         } else {
-          result = JSON.parse(body);
+          try {
+            result = JSON.parse(body);
+          } catch (error) {
+            console.error(error);
+            result = null;
+          }
           return callback(null);
         }
       });
@@ -134,4 +139,3 @@ function oembed(url, options, endpoint, mainCallback, _canonical) {
 module.exports.setForceXml = function(flag) {
   forceXml = flag;
 };
-
